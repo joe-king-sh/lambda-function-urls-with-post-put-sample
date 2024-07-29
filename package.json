@@ -1,5 +1,5 @@
 {
-  "name": "lambda-function-urls-sigv4-signer-sample",
+  "name": "lambda-function-urls-with-post-put-sample",
   "version": "0.0.0",
   "private": true,
   "workspaces": [

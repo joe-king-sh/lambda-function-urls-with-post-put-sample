@@ -71,9 +71,9 @@ def handler(_event, _context):
             eventType: LambdaEdgeEventType.ORIGIN_REQUEST,
             functionVersion: cdk.aws_lambda.Version.fromVersionArn(
               this,
-              "OriginRequestSigv4SignerFn",
+              "OriginRequestWithPostPutFn",
               this.getLambdaEdgeArn(
-                "/LambdaFunctionUrlsSigv4SignerSample/LambdaEdgeArn",
+                "/LambdaFunctionUrlsWithPostPutSample/LambdaEdgeArn",
               ),
             ),
             includeBody: true,
@@ -90,7 +90,7 @@ def handler(_event, _context):
         "OriginAccessControl",
         {
           originAccessControlConfig: {
-            name: "Origin Access Control for Lambda Function URLs",
+            name: "OAC for Lambda Function URLs",
             originAccessControlOriginType: "lambda",
             signingBehavior: "always",
             signingProtocol: "sigv4",

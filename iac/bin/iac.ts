@@ -7,8 +7,15 @@ import { LambdaEdgeStack } from "../lib/lambda-edge-stack";
 
 const app = new cdk.App();
 
-const lambdaEdgeStack = new LambdaEdgeStack(app, "Sigv4SignerLambdaEdgeStack", {
-  env: { region: "us-east-1" },
-});
+const lambdaEdgeStack = new LambdaEdgeStack(
+  app,
+  "LambdaFunctionsUrlWithPostPutSampleLambdaEdgeStack",
+  {
+    env: { region: "us-east-1" },
+  },
+);
 
-new ServerStack(app, "Sigv4SignerServerStack").addDependency(lambdaEdgeStack);
+new ServerStack(
+  app,
+  "LambdaFunctionsUrlWithPostPutSampleServerStack",
+).addDependency(lambdaEdgeStack);

@@ -11,7 +11,7 @@ export class LambdaEdgeStack extends cdk.Stack {
 
     const lambdaEdgeFunction = new NodejsFunction(this, "LambdaEdgeFunction", {
       runtime: lambda.Runtime.NODEJS_20_X,
-      entry: "./lib/lambda-edge/origin-request-sigv4-signer.ts",
+      entry: "./lib/lambda-edge/calculate-content-hash.ts",
       handler: "handler",
       memorySize: 1769,
       timeout: cdk.Duration.seconds(5),
@@ -29,9 +29,9 @@ export class LambdaEdgeStack extends cdk.Stack {
       }),
     });
 
-    new ssm.StringParameter(this, `${id}-Origin-Request-Sigv4-Signer-Fn-Id`, {
+    new ssm.StringParameter(this, `${id}-Calculate-Content-Hash-Fn-Id`, {
       description: "The Lambda@Edge ARN for CloudFront",
-      parameterName: "/LambdaFunctionUrlsSigv4SignerSample/LambdaEdgeArn",
+      parameterName: "/LambdaFunctionUrlsWithPostPutSample/LambdaEdgeArn",
       stringValue: lambdaEdgeFunction.currentVersion.functionArn,
       tier: ssm.ParameterTier.STANDARD,
     });

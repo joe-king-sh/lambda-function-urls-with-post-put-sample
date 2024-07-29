@@ -1,3 +1,3 @@
-# Lambda Function URLs Siv4 Signer Sample
+# Lambda Function URLs With POST/PUT Sample
 
-CloudFront + Lambda Function URLs の構成で、POST・PUT リクエストを Siv4 で署名するサンプルです。
+CloudFront + Lambda Function URLs の構成で、POST・PUT リクエストを行うサンプルです。
