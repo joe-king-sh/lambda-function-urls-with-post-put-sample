@@ -84,9 +84,32 @@ def handler(_event, _context):
       priceClass: PriceClass.PRICE_CLASS_200,
     });
 
+    const cfnOriginAccessControl =
+      new cdk.aws_cloudfront.CfnOriginAccessControl(
+        this,
+        "OriginAccessControl",
+        {
+          originAccessControlConfig: {
+            name: "Origin Access Control for Lambda Function URLs",
+            originAccessControlOriginType: "lambda",
+            signingBehavior: "always",
+            signingProtocol: "sigv4",
+          },
+        },
+      );
+
+    const cfnDistribution = cloudFrontDistribution.node
+      .defaultChild as cdk.aws_cloudfront.CfnDistribution;
+
+    // Set OAC
+    cfnDistribution.addPropertyOverride(
+      "DistributionConfig.Origins.0.OriginAccessControlId",
+      cfnOriginAccessControl.attrId,
+    );
+
     lambdaFunction.addPermission("AllowCloudFrontServicePrincipal", {
       principal: new cdk.aws_iam.ServicePrincipal("cloudfront.amazonaws.com"),
-      action: "lambda:InvokeFunction",
+      action: "lambda:InvokeFunctionUrl",
       sourceArn: `arn:aws:cloudfront::${
         cdk.Stack.of(this).account
       }:distribution/${cloudFrontDistribution.distributionId}`,
