@@ -14,7 +14,7 @@ export const handler: CloudFrontRequestHandler = async (
   const request = event.Records[0].cf.request;
   console.log("originalRequest", JSON.stringify(request));
 
-  if (!request.body?.body) {
+  if (!request.body?.data) {
     return request;
   }
 
